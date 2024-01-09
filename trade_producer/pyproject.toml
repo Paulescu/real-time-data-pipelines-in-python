@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "src"
+version = "0.1.0"
+description = ""
+authors = ["Paulescu <plabartabajo@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+websocket-client = "^1.7.0"
+quixstreams = ">=2.0a"
+pydantic = "^2.5.2"
+pyyaml = "^6.0.1"
+python-dotenv = "^1.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.9"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
