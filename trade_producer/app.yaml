@@ -4,7 +4,7 @@ variables:
   - name: output
     inputType: OutputTopic
     description: This is the output topic to write data to
-    defaultValue: ""
+    defaultValue: trade_events
     required: true
 dockerfile: build/dockerfile
 runEntryPoint: main.py
