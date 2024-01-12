@@ -1,15 +1,10 @@
 name: trade_producer
 language: python
 variables:
-  - name: input
-    inputType: InputTopic
-    description: This is the input topic to read data from
-    defaultValue: ''
-    required: true
   - name: output
     inputType: OutputTopic
     description: This is the output topic to write data to
-    defaultValue: output-topic
+    defaultValue: ""
     required: true
 dockerfile: build/dockerfile
 runEntryPoint: main.py

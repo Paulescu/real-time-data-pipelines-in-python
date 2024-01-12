@@ -12,6 +12,7 @@ quixstreams = ">=2.0a"
 pydantic = "^2.5.2"
 pyyaml = "^6.0.1"
 python-dotenv = "^1.0.0"
+fire = "^0.5.0"
 
 
 [tool.poetry.group.dev.dependencies]

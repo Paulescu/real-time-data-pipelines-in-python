@@ -56,7 +56,13 @@ Join more than 10k subscribers to the Real-World ML Newsletter. Every Saturday m
 
 ## Next steps
 
-- [ ] Save trades to feature store.
 - [ ] Make it run on quix platform
+    - [ ] ProducerWrapper that works locally
+    - [ ] Deploy trade_producer to quix platform
+
 - [ ] Add window operator to compute OHLC data
+
+- [ ] Save OHLC data to feature store.
+
+
 

@@ -1,41 +1,36 @@
-"""
-Connect to the Alpaca News API and dumps news into a Kafka topic.
-This version works for a Kafka cluster running locally.
-"""
 import os
 import logging
+from typing import Optional
 
-from quixstreams.kafka import Producer
+import fire
 
-# from src.utils import (
-#     initialize_logger,
-#     load_env_vars,
-# )
-# from src.kraken_api.api import KrakenTradesAPI
-# from src import config
-from utils import (
+from src.utils import (
     initialize_logger,
     load_env_vars,
 )
-from kraken_api.api import KrakenTradesAPI
-from config import PRODUCT_IDS
+from src.kraken_api.api import KrakenTradesAPI
+from src.producer_wrapper import ProducerWrapper
+
 
 logger = logging.getLogger()
 load_env_vars()
 
-# read environment variables
-KAFKA_BROKER_ADDRESS = os.environ["KAFKA_BROKER_ADDRESS"]
 KAFKA_OUTPUT_TOPIC = os.environ["KAFKA_OUTPUT_TOPIC"]
 
-def run():
-    # alpaca API client object
-    kraken_api_client = KrakenTradesAPI(product_ids=PRODUCT_IDS, log_enabled=False)
+PRODUCT_IDS = ["XBT/EUR", "XBT/USD"]
+
+def run(use_local_kafka: Optional[bool] = False):
+
+    # Kraken API client
+    kraken_api_client = KrakenTradesAPI(product_ids=PRODUCT_IDS,
+                                        log_enabled=False)
     kraken_api_client.subscribe()
 
-    with Producer(
-        broker_address=KAFKA_BROKER_ADDRESS,
-        extra_config={"allow.auto.create.topics": "true"},
+    with ProducerWrapper(
+        KAFKA_OUTPUT_TOPIC,
+        use_local_kafka
     ) as producer:
+       
         while True:
             # read trades from Kraken API
             trades = kraken_api_client.get_trades()
@@ -46,17 +41,15 @@ def run():
 
             # produce trades to Kafka
             for trade in trades:
-                value = trade.to_str()
-
                 producer.produce(
-                    topic=KAFKA_OUTPUT_TOPIC,
-                    # headers=[("uuid", str(uuid.uuid4()))],  # a dict is also allowed here
                     key=trade.product_id,
-                    value=value,
+                    value=trade.to_str(),
+                    # headers=[("uuid", str(uuid.uuid4()))],  # a dict is also allowed here
                 )
-                logger.info(f"Produced {value=} to {KAFKA_OUTPUT_TOPIC}")
+
+                logger.info(f"Produced {trade.to_str()=} to {KAFKA_OUTPUT_TOPIC}")
 
 if __name__ == "__main__":
-    initialize_logger(config_path="logging.yaml")
 
-    run()
+    initialize_logger(config_path="logging.yaml")
+    fire.Fire(run)
