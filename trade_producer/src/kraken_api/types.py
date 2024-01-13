@@ -1,4 +1,5 @@
 import json
+from typing import Dict
 
 from pydantic import BaseModel
 
@@ -23,3 +24,17 @@ class Trade(BaseModel):
         Returns a string representation of the Trade object.
         """
         return json.dumps(self.model_dump())
+
+    def to_dict(self) -> Dict[str, any]:
+        """
+        Convert the Trade object to a dictionary.
+
+        Returns:
+            dict: A dictionary representation of the Trade object.
+        """
+        return {
+            "product_id": self.product_id,
+            "price": self.price,
+            "volume": self.volume,
+            "timestamp": self.timestamp,
+        }

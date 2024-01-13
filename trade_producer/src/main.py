@@ -43,7 +43,7 @@ def run(use_local_kafka: Optional[bool] = False):
             for trade in trades:
                 producer.produce(
                     key=trade.product_id,
-                    value=trade.to_str(),
+                    value=trade.to_dict(),
                     # headers=[("uuid", str(uuid.uuid4()))],  # a dict is also allowed here
                 )
 

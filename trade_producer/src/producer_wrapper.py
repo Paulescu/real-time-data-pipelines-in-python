@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Dict
 import os
 import json
 
@@ -10,7 +10,12 @@ from quixstreams.models.serializers import (
 from quixstreams.platforms.quix import QuixKafkaConfigsBuilder, TopicCreationConfigs
 
 class ProducerWrapper:
-
+    """
+    Wrapper around the quixstreams.kafka.Producer class, to handle both
+    scenarios of
+    - using local Kafka cluster or
+    - Quix Kafka cluster.
+    """
     def __init__(
         self,
         kafka_topic: str,
@@ -41,8 +46,8 @@ class ProducerWrapper:
                 extra_config=cfgs
             )
             
-    def produce(self, key, value, headers=None, partition=None, timestamp=None):
-        
+    def produce(self, key, value: Dict[str, any], headers=None, partition=None, timestamp=None):
+
         # super().produce(topic, key, value, headers, partition, timestamp)
         if self._use_local_kafka:
             # Produce to local Kafka cluster.
@@ -59,8 +64,8 @@ class ProducerWrapper:
                 headers=headers,
                 key=key,
                 value=self._serialize(
-                    value=value, ctx=SerializationContext(
-                        topic=self._kafka_topic, headers=headers)
+                    value=value,
+                    ctx=SerializationContext(topic=self._kafka_topic, headers=headers)
                 ),
             )
 
@@ -70,29 +75,3 @@ class ProducerWrapper:
     def __exit__(self, exc_type, exc_value, traceback):
         # super().__exit__(exc_type, exc_value, traceback)
         self._producer.__exit__(exc_type, exc_value, traceback)
-
-def get_producer(is_local_kafka: Optional[bool] = False) -> Producer:
-    """
-    Returns a Kafka Producer object.
-    """
-    if is_local_kafka:
-        # Connect to local Kafka cluster.
-        producer = Producer(
-            broker_address=os.environ["KAFKA_BROKER_ADDRESS"],
-            extra_config={"allow.auto.create.topics": "true"},
-        )
-    else:
-        # Connect to Confluent Cloud Kafka cluster.
-        producer = Producer(
-            broker_address="pkc-4r287.europe-west1.gcp.confluent.cloud:9092",
-            extra_config={
-                "security.protocol": "SASL_SSL",
-                "sasl.mechanisms": "PLAIN",
-                "sasl.username": "YOUR_API_KEY",
-                "sasl.password": "YOUR_API_SECRET",
-                "ssl.ca.location": "/etc/ssl/certs",
-                "allow.auto.create.topics": "true",
-            },
-        )
-
-    return producer
