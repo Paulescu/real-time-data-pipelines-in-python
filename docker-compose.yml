@@ -70,6 +70,7 @@ services:
     environment:
       - KAFKA_BROKER_ADDRESS=redpanda:9092
       - output=trade_events
+      - use_local_kafka=true
     depends_on:
       - redpanda
 

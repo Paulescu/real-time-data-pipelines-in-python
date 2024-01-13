@@ -37,4 +37,5 @@ class Trade(BaseModel):
             "price": self.price,
             "volume": self.volume,
             "timestamp": self.timestamp,
+            "Timestamp": self.timestamp, # required by Quix
         }
