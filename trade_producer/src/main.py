@@ -47,7 +47,7 @@ def run(use_local_kafka: Optional[bool] = False):
                     # headers=[("uuid", str(uuid.uuid4()))],  # a dict is also allowed here
                 )
 
-                logger.info(f"Produced {trade.to_str()=} to {KAFKA_OUTPUT_TOPIC}")
+                logger.info(f"Produced {trade.to_str()=} with key={trade.product_id} to {KAFKA_OUTPUT_TOPIC}")
 
 if __name__ == "__main__":
 
