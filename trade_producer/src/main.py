@@ -15,11 +15,13 @@ from src.producer_wrapper import ProducerWrapper
 logger = logging.getLogger()
 load_env_vars()
 
+# USE_LOCAL_KAFKA = os.environ.get("use_local_kafka", False)
+USE_LOCAL_KAFKA = True if os.environ.get('use_local_kafka') is not None else False
 KAFKA_OUTPUT_TOPIC = os.environ["output"]
 
 PRODUCT_IDS = ["XBT/EUR", "XBT/USD"]
 
-def run(use_local_kafka: Optional[bool] = False):
+def run():
 
     # Kraken API client
     kraken_api_client = KrakenTradesAPI(product_ids=PRODUCT_IDS,
@@ -28,7 +30,7 @@ def run(use_local_kafka: Optional[bool] = False):
 
     with ProducerWrapper(
         KAFKA_OUTPUT_TOPIC,
-        use_local_kafka
+        USE_LOCAL_KAFKA
     ) as producer:
        
         while True:
