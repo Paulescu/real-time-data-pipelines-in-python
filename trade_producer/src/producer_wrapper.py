@@ -9,7 +9,7 @@ from quixstreams.models.serializers import (
 )
 from quixstreams.platforms.quix import QuixKafkaConfigsBuilder, TopicCreationConfigs
 
-class ProducerWrapper(Producer):
+class ProducerWrapper:
 
     def __init__(
         self,
@@ -41,7 +41,8 @@ class ProducerWrapper(Producer):
                 extra_config=cfgs
             )
             
-    def produce(self, topic, key, value, headers=None, partition=None, timestamp=None):
+    def produce(self, key, value, headers=None, partition=None, timestamp=None):
+        
         # super().produce(topic, key, value, headers, partition, timestamp)
         if self._use_local_kafka:
             # Produce to local Kafka cluster.
@@ -67,7 +68,8 @@ class ProducerWrapper(Producer):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        super().__exit__(exc_type, exc_value, traceback)
+        # super().__exit__(exc_type, exc_value, traceback)
+        self._producer.__exit__(exc_type, exc_value, traceback)
 
 def get_producer(is_local_kafka: Optional[bool] = False) -> Producer:
     """

@@ -74,7 +74,7 @@ services:
       - redpanda
 
   trade-to-ohlc:
-    # container_name: trade-to-ohlc
+    container_name: trade-to-ohlc
     restart: always
     build:
       context: "./trade_to_ohlc"
@@ -86,8 +86,8 @@ services:
       - KAFKA_OUTPUT_TOPIC=ohlc_events # TODO: change code to use this
     depends_on:
       - redpanda
-    deploy:
-      replicas: 1
+    # deploy:
+      # replicas: 1
 
   ohlc-to-feature-store:
     container_name: ohlc-to-feature-store

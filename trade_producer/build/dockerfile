@@ -3,6 +3,7 @@ FROM python:3.11.1-slim-buster
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONIOENCODING=UTF-8
+ENV PYTHONPATH="/app"
 
 WORKDIR /app
 COPY --from=git /project .
