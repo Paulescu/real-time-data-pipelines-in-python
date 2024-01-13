@@ -9,7 +9,7 @@ deployments:
   - name: trade_producer
     application: trade_producer
     deploymentType: Service
-    version: 93b00cb52b7af67b21049732be1b78eae5ba0a22
+    version: 5359fb9fe7ec86822bba9f466f3d53b2c55a71d7
     resources:
       cpu: 200
       memory: 500
