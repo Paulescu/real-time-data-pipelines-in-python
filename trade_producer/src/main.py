@@ -15,7 +15,7 @@ from src.producer_wrapper import ProducerWrapper
 logger = logging.getLogger()
 load_env_vars()
 
-KAFKA_OUTPUT_TOPIC = os.environ["KAFKA_OUTPUT_TOPIC"]
+KAFKA_OUTPUT_TOPIC = os.environ["output"]
 
 PRODUCT_IDS = ["XBT/EUR", "XBT/USD"]
 
