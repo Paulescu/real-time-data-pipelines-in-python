@@ -56,13 +56,17 @@ Join more than 10k subscribers to the Real-World ML Newsletter. Every Saturday m
 
 ## Next steps
 
-- [ ] Make it run on quix platform
-    - [ ] ProducerWrapper that works locally
-    - [ ] Deploy trade_producer to quix platform
+- [x] Make it run on quix platform
+    - [x] ProducerWrapper that works locally
+    - [x] Deploy trade_producer to quix platform
 
-- [ ] Add window operator to compute OHLC data
+- [ ] Run trade to ohlc
+    - [x] Locally
+    - [ ] Quix platform
+    - [ ] Add window operator to compute OHLC data
 
-- [ ] Save OHLC data to feature store.
+- [ ] Save OHLC data to Redis
+- [ ] Streamlit dashboard.
 
 
 

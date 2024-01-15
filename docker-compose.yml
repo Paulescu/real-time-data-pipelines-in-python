@@ -65,8 +65,8 @@ services:
     restart: always
     build:
       context: "./trade_producer"
-    env_file:
-      - .env
+    # env_file:
+      # - .env
     environment:
       - KAFKA_BROKER_ADDRESS=redpanda:9092
       - output=trade_events
@@ -79,26 +79,27 @@ services:
     restart: always
     build:
       context: "./trade_to_ohlc"
-    env_file:
-      - .env
+    # env_file:
+      # - .env
     environment:
       - KAFKA_BROKER_ADDRESS=redpanda:9092
-      - KAFKA_INPUT_TOPIC=trade_events # TODO: change code to use this
-      - KAFKA_OUTPUT_TOPIC=ohlc_events # TODO: change code to use this
+      - input=trade_events
+      - output=ohlc_events
+      - use_local_kafka=true
     depends_on:
       - redpanda
     # deploy:
       # replicas: 1
 
-  ohlc-to-feature-store:
-    container_name: ohlc-to-feature-store
-    restart: always
-    build:
-      context: "./ohlc_to_feature_store"
-    env_file:
-      - .env
-    environment:
-      - KAFKA_BROKER_ADDRESS=redpanda:9092
-      - KAFKA_INPUT_TOPIC=ohlc_events # TODO: change code to use this
-    depends_on:
-      - redpanda
+  # ohlc-to-feature-store:
+  #   container_name: ohlc-to-feature-store
+  #   restart: always
+  #   build:
+  #     context: "./ohlc_to_feature_store"
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - KAFKA_BROKER_ADDRESS=redpanda:9092
+  #     - KAFKA_INPUT_TOPIC=ohlc_events # TODO: change code to use this
+  #   depends_on:
+  #     - redpanda
