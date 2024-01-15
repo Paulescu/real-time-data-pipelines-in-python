@@ -467,12 +467,12 @@ files = [
 
 [[package]]
 name = "quixstreams"
-version = "2.1.2a0"
+version = "2.1.3a0"
 description = "Python library for building stream processing applications with Apache Kafka"
 optional = false
 python-versions = "<4,>=3.8"
 files = [
-    {file = "quixstreams-2.1.2a0-py3-none-any.whl", hash = "sha256:5c107d07f543db6338ad5f4f8af8b3489bb73fcf0449d84c4877514f3920d20b"},
+    {file = "quixstreams-2.1.3a0-py3-none-any.whl", hash = "sha256:e04bffd4020853902c8f1945529d544bbfc4b94c9d5150e76b584090cce22cc1"},
 ]
 
 [package.dependencies]

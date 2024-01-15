@@ -33,6 +33,8 @@ class ProducerWrapper:
                 extra_config={"allow.auto.create.topics": "true"},
             )
         else:
+            print("Connecting to Quix Kafka cluster...")
+            
             # Connect to Quix Kafka cluster.
             topic = kafka_topic
             cfg_builder = QuixKafkaConfigsBuilder()
