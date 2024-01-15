@@ -6,7 +6,7 @@ metadata:
 
 # This section describes the Deployments of the data pipeline
 deployments:
-  - name: trade_producer 6
+  - name: trade_producer
     application: trade_producer
     deploymentType: Service
     version: 7ec5b22a0cb72cadf5f54f2e2f490d0fb01ffbe4
