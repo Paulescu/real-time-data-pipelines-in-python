@@ -21,9 +21,9 @@ KAFKA_OUTPUT_TOPIC = os.environ["output"]
 
 PRODUCT_IDS = ["XBT/EUR", "XBT/USD"]
 
-print('ENV variables')
-print('SDK token', os.environ["Quix__Sdk__Token"])
-print('Workspace Id', os.environ["Quix__Workspace_Id"])
+# print('ENV variables')
+# print('SDK token', os.environ["Quix__Sdk__Token"])
+# print('Workspace Id', os.environ["Quix__Workspace_Id"])
 
 
 def run():
