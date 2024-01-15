@@ -43,7 +43,13 @@ class ProducerWrapper:
             cfg_builder = QuixKafkaConfigsBuilder()
             cfgs, topics, _ = cfg_builder.get_confluent_client_configs([topic])
             topic = topics[0]
+
+            # Use the topic name returned by "cfg_builder". 
+            # "cfg_builder" adds a prefix to the topic name that is required by the Quix platform
+            self._kafka_topic = topic
+
             cfg_builder.create_topics([TopicCreationConfigs(name=topic)])
+
             self._serialize = QuixTimeseriesSerializer()
 
             self._producer = Producer(
