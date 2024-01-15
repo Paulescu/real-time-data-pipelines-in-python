@@ -21,7 +21,7 @@ deployments:
         description: This is the output topic to write data to
         required: true
         value: trade_events
-  - name: trade_to_ohlc 2
+  - name: trade_to_ohlc
     application: trade_to_ohlc
     deploymentType: Service
     version: 69802ccc2566c93b10e74414842087425301ba29
