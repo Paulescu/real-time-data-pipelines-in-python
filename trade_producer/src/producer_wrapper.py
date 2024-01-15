@@ -1,6 +1,7 @@
 from typing import Optional, Dict
 import os
 import json
+import logging
 
 from quixstreams.kafka import Producer
 from quixstreams.models.serializers import (
@@ -8,6 +9,8 @@ from quixstreams.models.serializers import (
     SerializationContext,
 )
 from quixstreams.platforms.quix import QuixKafkaConfigsBuilder, TopicCreationConfigs
+
+logger = logging.getLogger()
 
 class ProducerWrapper:
     """
@@ -28,7 +31,7 @@ class ProducerWrapper:
 
         if use_local_kafka:
             
-            print("Connecting to Local Kafka cluster...")
+            logger.info("Connecting to Local Kafka cluster...")
 
             # Connect to local Kafka cluster.
             self._producer = Producer(
@@ -36,7 +39,7 @@ class ProducerWrapper:
                 extra_config={"allow.auto.create.topics": "true"},
             )
         else:
-            print("Connecting to Quix Kafka cluster...")
+            logger.info("Connecting to Quix Kafka cluster...")
 
             # Connect to Quix Kafka cluster.
             topic = kafka_topic

@@ -9,5 +9,4 @@ WORKDIR /app
 COPY . /app
 RUN python3 -m pip install -r requirements.txt
 
-# ENTRYPOINT ["python3", "src/main.py", "--use_local_kafka=true"]
 ENTRYPOINT ["python3", "src/main.py"]
