@@ -7,10 +7,8 @@ import logging
 
 from quixstreams import Application
 
-# import src.config as config
-# from src.utils import initialize_logger, load_env_vars
-# import config
-from utils import initialize_logger, load_env_vars
+from src.utils import initialize_logger, load_env_vars
+# from utils import initialize_logger, load_env_vars
 
 
 logger = logging.getLogger()
