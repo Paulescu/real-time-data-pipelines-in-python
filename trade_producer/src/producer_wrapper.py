@@ -27,6 +27,9 @@ class ProducerWrapper:
         self._serialize = None
 
         if use_local_kafka:
+            
+            print("Connecting to Local Kafka cluster...")
+
             # Connect to local Kafka cluster.
             self._producer = Producer(
                 broker_address=os.environ["KAFKA_BROKER_ADDRESS"],
@@ -34,7 +37,7 @@ class ProducerWrapper:
             )
         else:
             print("Connecting to Quix Kafka cluster...")
-            
+
             # Connect to Quix Kafka cluster.
             topic = kafka_topic
             cfg_builder = QuixKafkaConfigsBuilder()
