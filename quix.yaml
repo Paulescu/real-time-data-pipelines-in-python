@@ -41,21 +41,6 @@ deployments:
         description: This is the output topic to write data to
         required: true
         value: ohlc_events
-  - name: trade_producer 2
-    application: trade_producer
-    deploymentType: Service
-    version: 4de0a1bb2cda52ea2eb0a82534de389552de8dcf
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    desiredStatus: Stopped
-    variables:
-      - name: output
-        inputType: OutputTopic
-        description: This is the output topic to write data to
-        required: true
-        value: trade_events
 
 # This section describes the Topics of the data pipeline
 topics:
