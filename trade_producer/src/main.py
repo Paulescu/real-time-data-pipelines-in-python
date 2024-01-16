@@ -47,9 +47,7 @@ def run():
             # produce trades to Kafka
             for trade in trades:
                 producer.produce(
-                    topic=KAFKA_OUTPUT_TOPIC,
                     key=trade.product_id,
-                    # value=trade.to_dict(),
                     value=trade.to_str(),
                     headers=[("uuid", str(uuid.uuid4()))],  # a dict is also allowed here
                 )
