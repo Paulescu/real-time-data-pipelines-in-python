@@ -1,0 +1,11 @@
+name: demo_producer
+language: python
+variables:
+  - name: output
+    inputType: OutputTopic
+    description: This is the output topic to write data to
+    defaultValue: new_topic_test
+    required: true
+dockerfile: build/dockerfile
+runEntryPoint: main.py
+defaultFile: main.py
