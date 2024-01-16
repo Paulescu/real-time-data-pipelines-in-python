@@ -126,6 +126,21 @@ deployments:
         description: This is the output topic to write data to
         required: true
         value: trade_events
+  - name: demo_producer
+    application: demo_producer
+    deploymentType: Service
+    version: b47c732cb5e1b04b6359f1cbe231c6b64824c194
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: output
+        inputType: OutputTopic
+        description: This is the output topic to write data to
+        required: true
+        value: new_topic_test
 
 # This section describes the Topics of the data pipeline
 topics:
