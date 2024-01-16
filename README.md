@@ -62,10 +62,14 @@ Join more than 10k subscribers to the Real-World ML Newsletter. Every Saturday m
 
 - [ ] Run trade to ohlc
     - [x] Locally
-    - [ ] Quix platform
+    - [x] Quix platform
     - [ ] Add window operator to compute OHLC data
 
-- [ ] Save OHLC data to Redis
+- [x] Save OHLC data to Feature Group
+    - [x] Create feature group
+    - [x] Save to online Feature Group
+    - [ ] Run on Quix platform
+
 - [ ] Streamlit dashboard.
 
 

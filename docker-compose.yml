@@ -91,15 +91,16 @@ services:
     # deploy:
       # replicas: 1
 
-  # ohlc-to-feature-store:
-  #   container_name: ohlc-to-feature-store
-  #   restart: always
-  #   build:
-  #     context: "./ohlc_to_feature_store"
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     - KAFKA_BROKER_ADDRESS=redpanda:9092
-  #     - KAFKA_INPUT_TOPIC=ohlc_events # TODO: change code to use this
-  #   depends_on:
-  #     - redpanda
+  ohlc-to-feature-store:
+    container_name: ohlc-to-feature-store
+    restart: always
+    build:
+      context: "./ohlc_to_feature_store"
+    env_file:
+      - .env
+    environment:
+      - KAFKA_BROKER_ADDRESS=redpanda:9092
+      - input=ohlc_events
+      - use_local_kafka=true
+    depends_on:
+      - redpanda

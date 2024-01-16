@@ -1,49 +1,57 @@
 import os
 import logging
+from typing import Optional
 
-from quixstreams import Application
+# import redis
 
-import config
-from utils import initialize_logger, load_env_vars
-from feature_store_api.api import FeatureStore
+from src.utils import initialize_logger, load_env_vars
+from src.feature_store_api.api import FeatureStore
+from src.feature_store_api.types import FeatureGroupConfig
 
 logger = logging.getLogger()
 load_env_vars()
 
-# read environment variables
-KAFKA_BROKER_ADDRESS = os.environ["KAFKA_BROKER_ADDRESS"]
-KAFKA_INPUT_TOPIC = os.environ["KAFKA_INPUT_TOPIC"]
-
+KAFKA_INPUT_TOPIC = os.environ["input"]
+USE_LOCAL_KAFKA = True if os.environ.get('use_local_kafka') is not None else False
+OHLC_FEATURE_GROUP = FeatureGroupConfig(
+    name='ohlc_feature_group',
+    version=1,
+    description='OHLC data for crypto products',
+    primary_key=['timestamp', 'product_id'],
+    event_time='timestamp',
+    online_enabled=True,
+)
 
 def run():
     """
     Reads OHLC data from a Kafka topic and pushes the data to the Feature Store.
     """
     # Define Quix your application and settings
-    app = Application(
-        broker_address=KAFKA_BROKER_ADDRESS,
-        consumer_group="json__save_ohlc_consumer_group",
-        auto_offset_reset="earliest",
-        consumer_extra_config={"allow.auto.create.topics": "true"},
-        producer_extra_config={"allow.auto.create.topics": "true"},
+    from src.app_factory import get_app
+    app = get_app(
+        consumer_group='ohlc-to-redis-consumer-group',
+        use_local_kafka=USE_LOCAL_KAFKA,    
     )
 
-    # Define an input topic with JSON deserializer
-    logger.info(f"Subscribing to topic {KAFKA_INPUT_TOPIC}")
-    input_topic = app.topic(KAFKA_INPUT_TOPIC, value_deserializer="json")
+    # Define a deserializer
+    deserializer = "json" if USE_LOCAL_KAFKA else "quix"
+    
+    # Define an input topic with this deserializer
+    input_topic = app.topic(KAFKA_INPUT_TOPIC, value_deserializer=deserializer)
 
     # Define some feature store access object
     feature_store = FeatureStore()
 
     # Create a feature group in the Feature Store
-    feature_store.create_feature_group(config.OHLC_FEATURE_GROUP)
+    feature_group = feature_store.get_or_create_feature_group(OHLC_FEATURE_GROUP)
 
     # Create a StreamingDataFrame and push incoming messages to the FeatureStore using a custom function
     sdf = app.dataframe(topic=input_topic).update(
-        lambda value: feature_store.write(value, config.OHLC_FEATURE_GROUP)
+        lambda value: feature_group.write(value, keys=['timestamp', 'product_id'])
     )
 
     app.run(sdf)
+
 
 
 if __name__ == "__main__":

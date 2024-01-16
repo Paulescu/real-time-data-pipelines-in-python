@@ -5,8 +5,6 @@ to config.KAFKA_TOPIC_NAME_OHLC.
 import os
 import logging
 
-from quixstreams import Application
-
 from src.utils import initialize_logger, load_env_vars
 # from utils import initialize_logger, load_env_vars
 

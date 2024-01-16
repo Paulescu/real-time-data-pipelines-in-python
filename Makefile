@@ -2,7 +2,7 @@
 requirements:
 	cd trade_producer && make requirements
 	cd trade_to_ohlc && make requirements
-	cd ohlc_to_feature_store && make requirements
+	cd ohlc_to_redis && make requirements
 
 # Build Docker images for each service
 build: requirements
@@ -12,7 +12,7 @@ build: requirements
 # Start all services locally
 start:
 	echo "Starting local Kafka cluster"
-	docker-compose up -d
+	docker-compose up -d --remove-orphans
 
 # Stop all services locally
 stop:
@@ -34,4 +34,4 @@ format:
 	@echo "Formatting code..."
 	cd trade_producer && make format
 	cd trade_to_ohlc && make format
-	cd ohlc_to_feature_store && make format
+	cd ohlc_to_redis && make format
