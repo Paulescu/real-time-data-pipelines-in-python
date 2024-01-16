@@ -96,6 +96,21 @@ deployments:
         description: This is the output topic to write data to
         required: true
         value: trade_events
+  - name: trade_producer 4
+    application: trade_producer
+    deploymentType: Service
+    version: 49443517b523761dba0156ed7f7ccc2413ac6d3d
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: output
+        inputType: OutputTopic
+        description: This is the output topic to write data to
+        required: true
+        value: qts__trade_events
 
 # This section describes the Topics of the data pipeline
 topics:
