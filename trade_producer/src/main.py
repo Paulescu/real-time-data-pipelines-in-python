@@ -29,12 +29,12 @@ def run():
                                         log_enabled=False)
     kraken_api_client.subscribe()
 
-    from src.producer_wrapper import get_producer
-    # with ProducerWrapper(
-    #     KAFKA_OUTPUT_TOPIC,
-    #     USE_LOCAL_KAFKA
-    # ) as producer:
-    with get_producer(KAFKA_OUTPUT_TOPIC, USE_LOCAL_KAFKA) as producer:
+    with ProducerWrapper(
+        KAFKA_OUTPUT_TOPIC,
+        USE_LOCAL_KAFKA
+    ) as producer:
+    # from src.producer_wrapper import get_producer
+    # with get_producer(KAFKA_OUTPUT_TOPIC, USE_LOCAL_KAFKA) as producer:
         
         while True:
             # read trades from Kraken API
