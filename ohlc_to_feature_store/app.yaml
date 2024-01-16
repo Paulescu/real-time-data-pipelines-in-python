@@ -6,6 +6,11 @@ variables:
     description: This is the input topic to read data from
     defaultValue: ohlc_events
     required: true
+  - name: HOPSWORKS_PROJECT_NAME
+    inputType: Secret
+    description: ''
+    defaultValue: HOPSWORKS_PROJECT_NAME
+    required: true
 dockerfile: build/dockerfile
 runEntryPoint: main.py
 defaultFile: main.py
