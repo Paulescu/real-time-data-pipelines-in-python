@@ -54,7 +54,7 @@ with producer:
         }
         print(f"Producing value {value}")
         producer.produce(
-            topic=_kafka_topic,
+            topic=topic,
             headers=[("uuid", str(uuid.uuid4()))],  # a dict is also allowed here
             key=account_id,
             value=json.dumps(value),  # needs to be a string
