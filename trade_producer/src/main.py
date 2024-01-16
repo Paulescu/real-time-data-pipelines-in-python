@@ -15,15 +15,10 @@ from src.producer_wrapper import ProducerWrapper
 logger = logging.getLogger()
 load_env_vars()
 
-# USE_LOCAL_KAFKA = os.environ.get("use_local_kafka", False)
 USE_LOCAL_KAFKA = True if os.environ.get('use_local_kafka') is not None else False
 KAFKA_OUTPUT_TOPIC = os.environ["output"]
 
 PRODUCT_IDS = ["XBT/EUR", "XBT/USD"]
-
-# print('ENV variables')
-# print('SDK token', os.environ["Quix__Sdk__Token"])
-# print('Workspace Id', os.environ["Quix__Workspace_Id"])
 
 
 def run():
@@ -53,6 +48,8 @@ def run():
                     value=trade.to_dict(),
                     # headers=[("uuid", str(uuid.uuid4()))],  # a dict is also allowed here
                 )
+                
+                producer._producer.flush()
 
                 logger.info(f"Produced {trade.to_str()=} with key={trade.product_id} to {KAFKA_OUTPUT_TOPIC}")
 
