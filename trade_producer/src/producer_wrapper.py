@@ -61,27 +61,34 @@ class ProducerWrapper:
             )
             
     def produce(self, key, value: Dict[str, any], headers=None, partition=None, timestamp=None):
-
-        # super().produce(topic, key, value, headers, partition, timestamp)
-        if self._use_local_kafka:
-            # Produce to local Kafka cluster.
-            self._producer.produce(
-                topic=self._kafka_topic,
-                headers=headers,
-                key=key,
-                value=json.dumps(value),
-            )
-        else:
-            # Produce to Quix Kafka cluster.
-            self._producer.produce(
-                topic=self._kafka_topic,
-                headers=headers,
-                key=key,
-                value=self._serialize(
-                    value=value,
-                    ctx=SerializationContext(topic=self._kafka_topic, headers=headers)
-                ),
-            )
+        
+        self._producer.produce(
+            topic=self._kafka_topic,
+            headers=headers,
+            key=key,
+            value=json.dumps(value),
+        )
+        
+        # # super().produce(topic, key, value, headers, partition, timestamp)
+        # if self._use_local_kafka:
+        #     # Produce to local Kafka cluster.
+        #     self._producer.produce(
+        #         topic=self._kafka_topic,
+        #         headers=headers,
+        #         key=key,
+        #         value=json.dumps(value),
+        #     )
+        # else:
+        #     # Produce to Quix Kafka cluster.
+        #     self._producer.produce(
+        #         topic=self._kafka_topic,
+        #         headers=headers,
+        #         key=key,
+        #         value=self._serialize(
+        #             value=value,
+        #             ctx=SerializationContext(topic=self._kafka_topic, headers=headers)
+        #         ),
+        #     )
 
     def __enter__(self):
         return self
