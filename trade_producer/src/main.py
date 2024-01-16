@@ -1,6 +1,7 @@
 import os
 import logging
 from typing import Optional
+import uuid
 
 import fire
 
@@ -28,28 +29,30 @@ def run():
                                         log_enabled=False)
     kraken_api_client.subscribe()
 
-    with ProducerWrapper(
-        KAFKA_OUTPUT_TOPIC,
-        USE_LOCAL_KAFKA
-    ) as producer:
-       
+    from src.producer_wrapper import get_producer
+    # with ProducerWrapper(
+    #     KAFKA_OUTPUT_TOPIC,
+    #     USE_LOCAL_KAFKA
+    # ) as producer:
+    with get_producer(KAFKA_OUTPUT_TOPIC, USE_LOCAL_KAFKA) as producer:
+        
         while True:
             # read trades from Kraken API
             trades = kraken_api_client.get_trades()
             if not trades:
                 continue
 
-            # logger.info(f"Received {len(trades)} trades: {trades}")
+            logger.info(f"Received trades={trades} from Kraken API")
 
             # produce trades to Kafka
             for trade in trades:
                 producer.produce(
+                    topic=KAFKA_OUTPUT_TOPIC,
                     key=trade.product_id,
-                    value=trade.to_dict(),
-                    # headers=[("uuid", str(uuid.uuid4()))],  # a dict is also allowed here
+                    # value=trade.to_dict(),
+                    value=trade.to_str(),
+                    headers=[("uuid", str(uuid.uuid4()))],  # a dict is also allowed here
                 )
-                
-                producer._producer.flush()
 
                 logger.info(f"Produced {trade.to_str()=} with key={trade.product_id} to {KAFKA_OUTPUT_TOPIC}")
 

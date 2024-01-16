@@ -107,41 +107,41 @@ class ProducerWrapper:
     #     args_ = [arg for arg in (timeout,) if arg is not None]
     #     return self._producer.flush(*args_)
     
-# from typing import Tuple
-# def get_producer(
-#     kafka_topic: str,
-#     use_local_kafka: Optional[bool] = False,
-# ) -> Tuple[Producer, str]:
-#     """"""
-#     if use_local_kafka:
-#         logger.info(f"Connecting to Local Kafka cluster...")
+from typing import Tuple
+def get_producer(
+    kafka_topic: str,
+    use_local_kafka: Optional[bool] = False,
+) -> Producer:
+    """"""
+    if use_local_kafka:
+        logger.info(f"Connecting to Local Kafka cluster...")
 
-#         # Connect to local Kafka cluster.
-#         producer = Producer(
-#             broker_address=os.environ["KAFKA_BROKER_ADDRESS"],
-#             extra_config={"allow.auto.create.topics": "true"},
-#         )
+        # Connect to local Kafka cluster.
+        producer = Producer(
+            broker_address=os.environ["KAFKA_BROKER_ADDRESS"],
+            extra_config={"allow.auto.create.topics": "true"},
+        )
         
-#     else:
-#         logger.info(f"Connecting to Quix Kafka cluster...")
+    else:
+        logger.info(f"Connecting to Quix Kafka cluster...")
 
-#         # Connect to Quix Kafka cluster.
-#         topic = kafka_topic
-#         cfg_builder = QuixKafkaConfigsBuilder()
-#         cfgs, topics, _ = cfg_builder.get_confluent_client_configs([topic])
-#         topic = topics[0]
+        # Connect to Quix Kafka cluster.
+        topic = kafka_topic
+        cfg_builder = QuixKafkaConfigsBuilder()
+        cfgs, topics, _ = cfg_builder.get_confluent_client_configs([topic])
+        topic = topics[0]
 
-#         # Use the topic name returned by "cfg_builder". 
-#         # "cfg_builder" adds a prefix to the topic name that is required by the Quix platform
-#         kafka_topic = topic
+        # # Use the topic name returned by "cfg_builder". 
+        # # "cfg_builder" adds a prefix to the topic name that is required by the Quix platform
+        # kafka_topic = topic
 
-#         cfg_builder.create_topics([TopicCreationConfigs(name=topic)])
+        cfg_builder.create_topics([TopicCreationConfigs(name=topic)])
 
-#         # self._serialize = QuixTimeseriesSerializer()
+        # self._serialize = QuixTimeseriesSerializer()
 
-#         producer = Producer(
-#             broker_address=cfgs.pop("bootstrap.servers"),
-#             extra_config=cfgs
-#         )
+        producer = Producer(
+            broker_address=cfgs.pop("bootstrap.servers"),
+            extra_config=cfgs
+        )
 
-#     return producer, kafka_topic
+    return producer
