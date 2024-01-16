@@ -24,7 +24,7 @@ _kafka_topic = topic
 
 cfg_builder.create_topics([TopicCreationConfigs(name=topic)])
 
-serialize = QuixTimeseriesSerializer()
+# serialize = QuixTimeseriesSerializer()
 
 producer = Producer(
     broker_address=cfgs.pop("bootstrap.servers"),
@@ -54,7 +54,7 @@ with producer:
         }
         print(f"Producing value {value}")
         producer.produce(
-            topic=topic,
+            topic=_kafka_topic,
             headers=[("uuid", str(uuid.uuid4()))],  # a dict is also allowed here
             key=account_id,
             value=json.dumps(value),  # needs to be a string
