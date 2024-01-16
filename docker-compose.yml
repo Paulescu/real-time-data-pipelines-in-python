@@ -92,7 +92,7 @@ services:
       # replicas: 1
 
   ohlc-to-feature-store:
-    container_name: ohlc-to-feature-store
+    # container_name: ohlc-to-feature-store
     restart: always
     build:
       context: "./ohlc_to_feature_store"
@@ -104,3 +104,5 @@ services:
       - use_local_kafka=true
     depends_on:
       - redpanda
+    # deploy:
+      # replicas: 2

@@ -17,6 +17,25 @@ KAFKA_OUTPUT_TOPIC = os.environ["output"]
 USE_LOCAL_KAFKA = True if os.environ.get('use_local_kafka') is not None else False
 
 
+def get_timestamp(val: dict, *_):
+    return val["timestamp"] * 1000
+
+def reduce_price(state: dict, val: float) -> dict:
+    state["last"] = val
+    state["min"] = min(state["min"], val) 
+    state["max"] = max(state["max"], val) 
+
+    return state
+
+def init_reduce_price(val: float) -> dict:
+    
+    return {
+        "last" : val,
+        "first": val,
+        "max": val,
+        "min": val
+    }
+
 def run():
     """
     Defines the processing task that ingests
@@ -40,7 +59,7 @@ def run():
     sdf = app.dataframe(input_topic)
 
     # Window the data into 1 minute intervals
-    # TODO
+    sdf = sdf.apply(lambda val: val["price"]).tumbling_window(10, 0).reduce(reduce_price, init_reduce_price).final()
 
     sdf = sdf.update(lambda val: print(f"Sending update: {val}"))
 
@@ -49,7 +68,6 @@ def run():
 
     # Start message processing
     app.run(sdf)
-
 
 if __name__ == "__main__":
     initialize_logger(config_path="logging.yaml")

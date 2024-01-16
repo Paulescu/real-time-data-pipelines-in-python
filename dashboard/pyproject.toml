@@ -7,14 +7,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pydantic = "^2.5.2"
+streamlit = "^1.30.0"
+pandas = "^2.1.4"
+plotly = "^5.18.0"
 pyyaml = "^6.0.1"
 python-dotenv = "^1.0.0"
-quixstreams = {path = "quixstreams-2.2.0a0-py3-none-any.whl"}
+pydantic = "^2.5.3"
 
-
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.1.9"
 
 [build-system]
 requires = ["poetry-core"]

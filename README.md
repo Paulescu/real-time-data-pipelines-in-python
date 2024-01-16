@@ -3,7 +3,7 @@
 </div> -->
 
 <div align="center">
-    <h1>Build, deploy and monitor a real-time data pipeline in Python</h1>
+    <h1>Develop, deploy and monitor a production-ready real-time data pipeline in Python</h1>
     <h2><a href="">Quix</a> + MLOps = 🚀</h2>
     
 </div>
@@ -47,7 +47,7 @@
 [TODO]
 
 
-## Wanna learn more real-time LLMOps?
+## Wanna learn more real-time ML?
 
 Join more than 10k subscribers to the Real-World ML Newsletter. Every Saturday morning.
 
@@ -71,6 +71,10 @@ Join more than 10k subscribers to the Real-World ML Newsletter. Every Saturday m
     - [ ] Run on Quix platform
 
 - [ ] Streamlit dashboard.
+    - [ ] FeatureView to read data from Hopsworks
+    - [ ] Deploy Streamlit as container locally
+
+
 
 
 

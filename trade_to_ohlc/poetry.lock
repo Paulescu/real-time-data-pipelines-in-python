@@ -453,12 +453,12 @@ files = [
 
 [[package]]
 name = "quixstreams"
-version = "2.1.2a0"
+version = "2.2.0a0"
 description = "Python library for building stream processing applications with Apache Kafka"
 optional = false
 python-versions = "<4,>=3.8"
 files = [
-    {file = "quixstreams-2.1.2a0-py3-none-any.whl", hash = "sha256:5c107d07f543db6338ad5f4f8af8b3489bb73fcf0449d84c4877514f3920d20b"},
+    {file = "quixstreams-2.2.0a0-py3-none-any.whl", hash = "sha256:5eaefed52ebb00be44d6efdbd2a813b8123b73b76b560410104742a60864ca69"},
 ]
 
 [package.dependencies]
@@ -467,6 +467,10 @@ orjson = ">=3.9,<4"
 requests = ">=2.28"
 rocksdict = ">=0.3,<0.4"
 typing-extensions = ">=4.8,<4.9"
+
+[package.source]
+type = "file"
+url = "quixstreams-2.2.0a0-py3-none-any.whl"
 
 [[package]]
 name = "requests"
@@ -590,4 +594,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "bc95f0e5ced0162426d76ea8a03632b89dafb8dd50bdffd1f4ab72ff846378b8"
+content-hash = "fb0254e78940b0da610776c6aa063ea0b5c050afaa6783b4f0526a7bcae701e5"
