@@ -32,20 +32,20 @@ st.markdown(
 
 """)
 
-default_height = 2000
+default_height = 1000
 
 with st.container():
     col11, col12 = st.columns(2)
     # col11 = st.columns(1)
     with col11:
         # Header of the first column
-        st.header("Trades in the last 5 minutes")
+        st.header("OHLC 10-second data last 5 minutes")
         # A placeholder for the first chart to update it later with data
         placeholder_col11 = st.empty()
 
     with col12:
         # Header of the second column
-        st.header("User stats in the last 5 minutes")
+        st.header("OHLC 10-second data last 5 minutes")
         # A placeholder for the second chart to update it later with data
         placeholder_col12 = st.empty()
 
@@ -66,11 +66,6 @@ while True:
         from src.plot import get_candlestick_plot
         p = get_candlestick_plot(features, window_seconds=10)
         st.bokeh_chart(p, use_container_width=True)
-        
-        # st.dataframe(features,
-        #              hide_index=True,
-        #              use_container_width=True,
-        #              height=default_height)
-        
+                
     # Wait for one second before asking for new data from Quix
     time.sleep(1)
