@@ -5,7 +5,22 @@ metadata:
   version: 1.0
 
 # This section describes the Deployments of the data pipeline
-deployments: []
+deployments:
+  - name: trade_producer
+    application: trade_producer
+    deploymentType: Service
+    version: 8ed312eb6f32b358f83512b9965aa85f5aa9869d
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: output
+        inputType: OutputTopic
+        description: This is the output topic to write data to
+        required: true
+        value: trades_topic
 
 # This section describes the Topics of the data pipeline
 topics:
