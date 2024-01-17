@@ -9,7 +9,7 @@ variables:
   - name: output
     inputType: OutputTopic
     description: This is the output topic to write data to
-    defaultValue: ohlc_events
+    defaultValue: ohlc_topic
     required: true
 dockerfile: build/dockerfile
 runEntryPoint: main.py
