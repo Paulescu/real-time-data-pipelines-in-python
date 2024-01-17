@@ -70,9 +70,9 @@ Join more than 10k subscribers to the Real-World ML Newsletter. Every Saturday m
     - [x] Save to online Feature Group
     - [ ] Run on Quix platform
 
-- [ ] Streamlit dashboard.
+- [x] Streamlit dashboard.
     - [x] FeatureView to read data from Hopsworks
-    - [ ] Deploy Streamlit as container locally
+    - [x] Deploy Streamlit as container locally
 
 
 
