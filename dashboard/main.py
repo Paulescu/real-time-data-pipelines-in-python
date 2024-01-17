@@ -7,7 +7,7 @@ import datetime
 import logging
 
 from src.utils import initialize_logger, load_env_vars
-from src.backend import get_trades_from_feature_store
+from src.backend import get_features
 
 initialize_logger()
 load_env_vars()
@@ -16,46 +16,61 @@ logger = logging.getLogger()
 
 # Basic configuration of the Streamlit dashboard
 st.set_page_config(
-    page_title="Real-Time User Stats Dashboard (Quix)",
+    page_title="Real-Time OHLC data for crypto products",
     page_icon="✅",
     layout="wide",
     menu_items={
-        'About': "This dashboard shows real-time user stats the Clickstream Analysis template. More info at https://quix.io/templates"
+        'About': "This dashboard shows real-time OHLC data computed from Kraken API using Quix Streams"
     }
 )
 
-st.header("Real-Time User Analytics Dashboard", divider="blue")
+st.header("Real-Time OHLC data", divider="blue")
 st.markdown(
-"""This dashboard vizualizes real-time agreggations and statistics from a demo clickstream. The clickstream data is being streamed from a sample log file for an online retailer and processed in a Pipeline hosted in Quix—a cloud-native solution for building event streaming applications.
+"""This dashboard vizualizes real-time OHLC data computed from Kraken API using [Quix Streams](https://github.com/quixio/quix-streams).
 
-* To explore the back-end services that power this Dashboard, check out the [Pipeline view](https://portal.platform.quix.io/pipeline?workspace=demo-clickstream-prod&token=pat-b88b3caf912641a1b0fa8b47b262868b) in Quix.
+* To explore the back-end services that power this Dashboard, check out [this repository](https://github.com/Paulescu/real-time-data-pipelines-in-python)
 
-* To see how real-time clickstream analysis can be used to trigger events in a front end, see our accompanying [Clickstream Event Detection demo](https://template-clickstream-front-end.vercel.app/)
 """)
 
-default_height = 200
+default_height = 2000
 
 with st.container():
-    # col11, col12, col13 = st.columns(3)
-    col11 = st.columns(1)
+    col11, col12 = st.columns(2)
+    # col11 = st.columns(1)
     with col11:
         # Header of the first column
         st.header("Trades in the last 5 minutes")
         # A placeholder for the first chart to update it later with data
         placeholder_col11 = st.empty()
 
+    with col12:
+        # Header of the second column
+        st.header("User stats in the last 5 minutes")
+        # A placeholder for the second chart to update it later with data
+        placeholder_col12 = st.empty()
+
 while True:
 
-    with placeholder_col11.container():
-        
-        # Fetch trades from the feature store
-        trades : pd.DataFrame = get_trades_from_feature_store(last_minutes=5)
+    # Fetch ohlc data from the feature store
+    features : pd.DataFrame = get_features(last_minutes=5)
 
+    with placeholder_col11.container():    
         # plot it as Streamlit Dataframe
-        st.dataframe(trades,
+        st.dataframe(features,
                      hide_index=True,
                      use_container_width=True,
                      height=default_height)
 
+    with placeholder_col12.container():    
+        # plot it as Candle chart
+        from src.plot import get_candlestick_plot
+        p = get_candlestick_plot(features, window_seconds=10)
+        st.bokeh_chart(p, use_container_width=True)
+        
+        # st.dataframe(features,
+        #              hide_index=True,
+        #              use_container_width=True,
+        #              height=default_height)
+        
     # Wait for one second before asking for new data from Quix
     time.sleep(1)

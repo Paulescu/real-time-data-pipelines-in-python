@@ -92,7 +92,7 @@ services:
       # replicas: 1
 
   ohlc-to-feature-store:
-    # container_name: ohlc-to-feature-store
+    container_name: ohlc-to-feature-store
     restart: always
     build:
       context: "./ohlc_to_feature_store"
@@ -106,3 +106,13 @@ services:
       - redpanda
     # deploy:
       # replicas: 2
+
+  streamlit-app:
+    container_name: streamlit-app
+    restart: always
+    build:
+      context: "./dashboard"
+    ports:
+      - "80:80"
+    env_file:
+      - .env

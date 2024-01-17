@@ -63,7 +63,7 @@ Join more than 10k subscribers to the Real-World ML Newsletter. Every Saturday m
 - [ ] Run trade to ohlc
     - [x] Locally
     - [x] Quix platform
-    - [ ] Add window operator to compute OHLC data
+    - [x] Add window operator to compute OHLC data
 
 - [x] Save OHLC data to Feature Group
     - [x] Create feature group
@@ -71,7 +71,7 @@ Join more than 10k subscribers to the Real-World ML Newsletter. Every Saturday m
     - [ ] Run on Quix platform
 
 - [ ] Streamlit dashboard.
-    - [ ] FeatureView to read data from Hopsworks
+    - [x] FeatureView to read data from Hopsworks
     - [ ] Deploy Streamlit as container locally
 
 

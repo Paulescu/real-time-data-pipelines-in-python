@@ -13,6 +13,7 @@ plotly = "^5.18.0"
 pyyaml = "^6.0.1"
 python-dotenv = "^1.0.0"
 pydantic = "^2.5.3"
+bokeh = "2.4.3"
 
 
 [build-system]

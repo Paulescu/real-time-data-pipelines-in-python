@@ -16,7 +16,7 @@ logger = logging.getLogger()
 
 OHLC_FEATURE_GROUP = FeatureGroupConfig(
     name='ohlc_feature_group',
-    version=1,
+    version=2,
     description='OHLC data for crypto products',
     primary_key=['timestamp', 'product_id'],
     event_time='timestamp',
@@ -25,7 +25,7 @@ OHLC_FEATURE_GROUP = FeatureGroupConfig(
 
 OHLC_FEATURE_VIEW = FeatureViewConfig(
     name='ohlc_feature_view',
-    version=1,
+    version=3,
     description='OHLC feature view',
     feature_group_config=OHLC_FEATURE_GROUP,
 )
@@ -47,7 +47,7 @@ def generate_list_primary_keys(
 
     return primary_keys
 
-def get_trades_last_5_minutes(
+def get_features(
     last_minutes: int = 5,
     current_unix_seconds: Optional[int] = None,
     product_ids: Optional[list] = ['XBT/EUR'],
@@ -65,20 +65,22 @@ def get_trades_last_5_minutes(
     logger.info("Getting feature view to read data from")
     feature_view = feature_store.get_or_create_feature_view(OHLC_FEATURE_VIEW)
 
+    logger.info("Generating primary keys to read data from")
     from_unix_seconds = current_unix_seconds - last_minutes * 60
-    logger.info(f"Getting data from {from_unix_seconds} to {current_unix_seconds}")
     primary_keys = generate_list_primary_keys(
         from_unix_seconds, 
         current_unix_seconds,
         product_ids)
     
-    # breakpoint()
+    logger.info(f'Reading {len(primary_keys)} primary keys from feature view')
+    features : pd.DataFrame = feature_view.read(primary_keys)
 
-    trades : pd.DataFrame = feature_view.read(primary_keys)
+    # sort ohlc by product_id and timestamp
+    features = features.sort_values(by=['product_id', 'timestamp'])
 
-    return trades
+    return features
 
 if __name__ == '__main__':
 
-    trades = get_trades_last_5_minutes(last_minutes=1)
-    print(trades)
+    features = get_features(last_minutes=10, product_ids=['XBT/EUR', 'XBT/USD'])
+    print(features)

@@ -1,2 +1,7 @@
+requirements:
+	echo "Exporting Python project dependencies"
+	# poetry run pip freeze > requirements.txt
+	poetry export -f requirements.txt --output requirements.txt --without-hashes
+
 dashboard:
-	poetry run streamlit run main.py
+	poetry run streamlit run main.py --server.runOnSave true

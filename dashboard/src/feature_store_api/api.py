@@ -50,14 +50,12 @@ class FeatureView:
 
     def read(self, primary_keys: List[Dict[str, Any]]) -> pd.DataFrame:
         
-        breakpoint()
-
         return self._fv.get_feature_vectors(
             entry=primary_keys,
             return_type="pandas"
         )
         
-        return self._fv.get_feature_vectors(entry=primary_keys,return_type="pandas")
+        # return self._fv.get_feature_vectors(entry=primary_keys,return_type="pandas")
 
 
 class FeatureStore:
