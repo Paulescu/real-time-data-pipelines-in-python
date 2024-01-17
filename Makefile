@@ -2,10 +2,10 @@
 requirements:
 	cd trade_producer && make requirements
 	cd trade_to_ohlc && make requirements
-	cd ohlc_to_redis && make requirements
+	# cd ohlc_to_feature_store && make requirements
 
 # Build Docker images for each service
-build: requirements
+build:
 	echo "Building Docker images"
 	docker-compose build
 

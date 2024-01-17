@@ -89,7 +89,7 @@ class KrakenTradesAPI:
                 price=float(trade[0]),
                 volume=float(trade[1]),
                 # timestamp=datetime.utcfromtimestamp(int(float(trade[2])))
-                timestamp=int(float(trade[2])),
+                timestamp=int(float(trade[2])) * 1000, # milliseconds
             )
             for trade in raw_trades
         ]

@@ -18,7 +18,8 @@ USE_LOCAL_KAFKA = True if os.environ.get('use_local_kafka') is not None else Fal
 
 
 def get_timestamp(val: dict, *_):
-    return val["timestamp"] * 1000
+    # return val["timestamp"] * 1000
+    return val["timestamp"]
 
 def reduce_price(state: dict, val: dict) -> dict:
     state["last"] = val['price']

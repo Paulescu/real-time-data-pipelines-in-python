@@ -42,8 +42,10 @@ def run():
             # produce trades to Kafka
             for trade in trades:
                 producer.produce(
-                    key=trade.product_id,
-                    value=trade.to_str(),
+                    # key=trade.product_id,
+                    key=trade.product_id.replace("/", "-"),
+                    # value=trade.to_str(),
+                    value=trade.to_dict(),
                     headers=[("uuid", str(uuid.uuid4()))],  # a dict is also allowed here
                 )
 
