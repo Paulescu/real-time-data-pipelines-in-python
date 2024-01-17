@@ -4,7 +4,7 @@ variables:
   - name: input
     inputType: InputTopic
     description: This is the input topic to read data from
-    defaultValue: trade_events
+    defaultValue: trades_topic
     required: true
   - name: output
     inputType: OutputTopic
