@@ -5,7 +5,14 @@ metadata:
   version: 1.0
 
 # This section describes the Deployments of the data pipeline
-deployments:
+deployments: []
 
 # This section describes the Topics of the data pipeline
 topics:
+  - name: trades_topic
+    persisted: false
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: 1440
+      retentionInBytes: 52428800
