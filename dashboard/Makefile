@@ -1,6 +1,5 @@
 requirements:
 	echo "Exporting Python project dependencies"
-	# poetry run pip freeze > requirements.txt
 	poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 dashboard:

@@ -12,7 +12,7 @@ ENV PYTHONPATH="/app"
 
 WORKDIR /app
 COPY . /app
-RUN python3 -m pip install -r requirements.txt
+RUN python3 -m pip install -r requirements_docker.txt
 
 # Install hopsworks python library manually here
 RUN python3 -m pip install "hopsworks==3.4.3"
