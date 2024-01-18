@@ -65,8 +65,6 @@ services:
     restart: always
     build:
       context: "./trade_producer"
-    # env_file:
-      # - .env
     environment:
       - KAFKA_BROKER_ADDRESS=redpanda:9092
       - output=trades_topic
@@ -79,8 +77,6 @@ services:
     restart: always
     build:
       context: "./trade_to_ohlc"
-    # env_file:
-      # - .env
     environment:
       - KAFKA_BROKER_ADDRESS=redpanda:9092
       - input=trades_topic
@@ -88,8 +84,6 @@ services:
       - use_local_kafka=true
     depends_on:
       - redpanda
-    # deploy:
-      # replicas: 1
 
   ohlc-to-feature-store:
     container_name: ohlc-to-feature-store
@@ -104,8 +98,6 @@ services:
       - use_local_kafka=true
     depends_on:
       - redpanda
-    # deploy:
-      # replicas: 2
 
   streamlit-app:
     container_name: streamlit-app

@@ -32,9 +32,6 @@ def run():
         consumer_group='ohlc-to-redis-consumer-group',
         use_local_kafka=USE_LOCAL_KAFKA,    
     )
-
-    # Define a deserializer
-    # deserializer = "json" if USE_LOCAL_KAFKA else "quix"
     
     # Define an input topic with this deserializer
     input_topic = app.topic(KAFKA_INPUT_TOPIC, value_deserializer="json")
