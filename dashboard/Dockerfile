@@ -11,10 +11,14 @@ ENV PYTHONIOENCODING=UTF-8
 ENV PYTHONPATH="/app"
 
 WORKDIR /app
-COPY . /app
-RUN python3 -m pip install -r requirements.txt
+
+# Copy only the requirements file to the container
+COPY requirements.txt /app/
+RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
 # Install hopsworks python library manually here
-RUN python3 -m pip install "hopsworks==3.4.3"
+RUN python3 -m pip install --no-cache-dir "hopsworks==3.4.3"
 
+# Copy the rest of the application code to the container
+COPY . /app/
 ENTRYPOINT ["streamlit", "run", "main.py", "--server.port=80"]

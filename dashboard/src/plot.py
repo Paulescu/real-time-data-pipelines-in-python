@@ -6,7 +6,8 @@ from bokeh.plotting import figure
 
 def get_candlestick_plot(
     df: pd.DataFrame,
-    window_seconds: int    
+    window_seconds: int,
+    last_minutes: int,    
 ) -> figure:
     """Generates a candlestick plot using the provided data in `df_` and the
     Bokeh library
@@ -30,8 +31,8 @@ def get_candlestick_plot(
 
     TOOLS = "pan,wheel_zoom,box_zoom,reset,save"
 
-    x_max = df['date'].max() + timedelta(minutes=2)
-    x_min = df['date'].max() - timedelta(minutes=4)
+    x_max = df['date'].max() + timedelta(minutes=1)
+    x_min = df['date'].max() - timedelta(minutes=last_minutes)
     p = figure(x_axis_type="datetime", tools=TOOLS, width=1000,
                title = "ETH/USD", x_range=(x_min, x_max))
     p.grid.grid_line_alpha=0.3
