@@ -10,8 +10,9 @@
 
 #### Table of contents
 * [The problem](#the-problem)
-* [Solution](#solution)
-* [Run the whole thing in 5 minutes](#run-the-whole-thing-in-5-minutes)
+* [Example](#example)
+* [How to run the pipeline locally](#run-the-pipeline-locally)
+* [Deployment](#run-the-pipeline-locally)
 * [Video lecture](#video-lecture)
 * [Wanna learn more real-time ML?](#wanna-learn-more-real-time-ml)
 
@@ -24,11 +25,11 @@ Before you even get to work on your ML model, you need to design, develop and de
 
 This pipeline needs to
 
-- Ingest raw data from an external service, like raw trades from the Kraken Websocket API.
+- **Ingest** raw data from an external service, like raw trades from the Kraken Websocket API.
 
-- Transform these trades into features for your ML model, like trading indicators based on 1-minute OHLC candles, and
+- **Transform** these trades into features for your ML model, like trading indicators based on 1-minute OHLC candles, and
 
-- Store these features in a Feature Store, so your ML models can fetch them both to generate training data, and to generate real-time predictions.
+- **Save** these features in a Feature Store, so your ML models can fetch them both to generate training data, and to generate real-time predictions.
 
 In a real-world setting, each of these steps is implemented as a separate service, and communication between these services happens through a message broker like Kafka.
 
@@ -45,7 +46,7 @@ Let's go through an example.
 
 In this repo you have a full implementation of a production-ready real-time feature pipeline for crypto trading.
 
-We will use [Quix Streams 2.0](https://github.com/quixio/quix-streams) which is a cloud native library for processing data in Kafka using pure Python.
+We use [Quix Streams 2.0](https://github.com/quixio/quix-streams) which is a cloud native library for processing data in Kafka using pure Python.
 
 With Quix Streams we get the best from both worlds:
 
@@ -54,14 +55,19 @@ With Quix Streams we get the best from both worlds:
 - an easy-to-use Python interface, which makes this library extremely user-friendly for Data Scientist and ML engineers like you and me.
 
 
-## Run the whole thing in 5 minutes
+## Run the pipeline locally in 5 minutes
 
-1. Create an `.env` file and fill in the necessary credentials to save 
+1. Create an `.env` file and fill in the credentials to connect to the serverles Hopsworks Feature Store
     ```
     $ cp .env.example .env
     ```
 
-2. Run the pipeline locally
+2. Build Docker image for each of the pipeline steps: `trade_producer`, `trade_to_ohlc` and `ohlc_to_feature_store`
+    ```
+    $ make build
+    ```
+
+3. Start the pipeline
     ```
     $ make start
     ```
@@ -71,9 +77,19 @@ With Quix Streams we get the best from both worlds:
     $ make stop
     ```
 
+## Run the pipeline in production
+
+This pipeline can run on any production environment that supports Docker and a message broker like Apache Kafka.
+
+So, if you already have a Kubernetes cluster for your microservices, and use a Kafka broker
+
+In this case, we will deploy it the pipeline to the Quix Cloud, ‍which provides fully managed containers, Kafka and observability tools to run your applications in production.
+
+
+
+
 ## Video lecture
 
-[TODO]
 
 
 ## Wanna learn more real-time ML?
