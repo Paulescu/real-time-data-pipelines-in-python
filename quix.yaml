@@ -100,7 +100,7 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: dashboard-2
-    desiredStatus: Running
+    desiredStatus: Stopped
     variables:
       - name: HOPSWORKS_PROJECT_NAME
         inputType: Secret
