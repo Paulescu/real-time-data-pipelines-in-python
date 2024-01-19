@@ -8,12 +8,19 @@
     
 </div>
 
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=JMQwXmlloJM">
+    <img src="assets/yt_cover.png" alt="Intro to the course" style="width:75%;">
+    <p>Click here to watch the video 🎬</p>
+  </a>
+</div>
+
+
 #### Table of contents
 * [The problem](#the-problem)
 * [Example](#example)
 * [Run the pipeline locally](#run-the-pipeline-locally)
-* [Deployment](#run-the-pipeline-locally)
-* [Video lecture](#video-lecture)
+* [Deployment](#deployment)
 * [Wanna learn more real-time ML?](#wanna-learn-more-real-time-ml)
 
 
@@ -102,28 +109,23 @@ The final pipeline has been deployed to the [Quix Cloud](https://quix.io/), as w
     $ make stop
     ```
 
-## Run the pipeline in production
+## Deployment
 
-This pipeline can run on any production environment that supports Docker and a message broker like Apache Kafka or Redpanda.
-
-In this example, I have deployed it to Quix Cloud.
+This pipeline can run on any production environment that supports Docker and a message broker like Apache Kafka or Redpanda. In this example, I have deployed it to Quix Cloud.
 
 >[Quix Cloud](https://quix.io/) provides fully managed containers, Kafka and observability tools to run your applications in production.
 
+To deploy this pipeline to the [Quix Cloud]() you just need to
 
-## Video lecture
+- [Sign up for FREE](https://quix.io/)
+- Create a Quix Cloud Project and an environment, and
+- Fork this repository and link it to your newly created Quix Cloud environment.
 
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=JMQwXmlloJM">
-      <p>Click here to watch the video 🎬</p>
-    <img src="assets/yt_cover.png" alt="Intro to the course" style="width:75%;">
-  </a>
-</div>
-
+> [This video](https://quix.io/docs/create/overview.html#next-step) will help you get up and running on Quix Cloud
 
 
 ## Wanna learn more real-time ML?
 
-Join more than 10k subscribers to the Real-World ML Newsletter. Every Saturday morning.
+Join more than 11k subscribers to the Real-World ML Newsletter. Every Saturday morning.
 
-[👉🏽 Click to subscribe](https://www.realworldml.xyz/subscribe)
+[→ Subscribe for FREE 🤗](https://www.realworldml.xyz/subscribe)
