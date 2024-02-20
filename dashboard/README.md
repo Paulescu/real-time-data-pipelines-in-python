@@ -15,3 +15,19 @@
   </a>
 </div>
 
+## Run the dashboard locally
+
+1. Create an `.env` file and fill in the credentials to connect to the serverles Hopsworks Feature Store
+    ```
+    $ cp .env.example .env
+    ```
+
+2. Build Docker image
+    ```
+    $ make build
+    ```
+
+3. Run the dockerized dashboard
+    ```
+    $ make run
+    ```
