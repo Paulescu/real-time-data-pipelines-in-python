@@ -31,7 +31,7 @@ class FeatureGroup:
         df = pd.DataFrame.from_records([_value])
 
         # Write the DataFrame to the feature group
-        logger.info(f'Writing {df} to feature group {self._fg}')
+        logger.info(f'Writing {df} to feature group {self._fg.name} version={self._fg.version}')
         if online_only:
             self._fg.insert(df, write_options={"start_offline_backfill": False})
         else:

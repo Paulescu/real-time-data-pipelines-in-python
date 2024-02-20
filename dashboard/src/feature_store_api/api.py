@@ -31,7 +31,7 @@ class FeatureGroup:
         df = pd.DataFrame.from_records([_value])
 
         # Write the DataFrame to the feature group
-        logger.info(f'Writing {df} to feature group {self._fg}')
+        logger.info(f'Writing {df} to feature group {self._fg.name} version={self._fg.version}')
         if online_only:
             self._fg.insert(df, write_options={"start_offline_backfill": False})
         else:
@@ -50,6 +50,9 @@ class FeatureView:
 
     def read(self, primary_keys: List[Dict[str, Any]]) -> pd.DataFrame:
         
+        # breakpoint()
+        # self._fv.get_feature_vectors(entry=primary_keys)
+
         return self._fv.get_feature_vectors(
             entry=primary_keys,
             return_type="pandas"

@@ -6,7 +6,8 @@ authors = ["Paulescu <plabartabajo@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.10,<3.12"
+hopsworks = "^3.4.4"
 quixstreams = ">=2.0a"
 pydantic = "^2.5.2"
 pyyaml = "^6.0.1"

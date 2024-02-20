@@ -6,6 +6,6 @@ variables:
     description: This is the output topic to write data to
     defaultValue: trades_topic
     required: true
-dockerfile: build/dockerfile
+dockerfile: Dockerfile
 runEntryPoint: main.py
 defaultFile: main.py

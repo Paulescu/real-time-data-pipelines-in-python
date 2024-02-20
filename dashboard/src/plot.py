@@ -23,7 +23,7 @@ def get_candlestick_plot(
         figure.Figure: Bokeh figure with candlestick and Bollinger bands
     """
     # convert the timestamp column in unix seconds to a datetime object
-    df["date"] = pd.to_datetime(df["timestamp"], unit="s")
+    df["date"] = pd.to_datetime(df["timestamp"], unit="ms")
 
     inc = df.close > df.open
     dec = df.open > df.close

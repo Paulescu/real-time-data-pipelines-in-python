@@ -58,7 +58,7 @@ while True:
     features : pd.DataFrame = get_features(last_minutes=LAST_MINUTES)
 
     # add column with datetime UTC from features['timestamp']
-    features['datetime'] = pd.to_datetime(features['timestamp'], unit='s', utc=True)
+    features['datetime'] = pd.to_datetime(features['timestamp'], unit='ms', utc=True)
     
     with placeholder_col11.container():    
         # plot it as Streamlit Dataframe

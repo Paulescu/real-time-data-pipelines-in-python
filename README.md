@@ -87,7 +87,7 @@ The final pipeline has been deployed to the [Quix Cloud](https://quix.io/), as w
 
 
 
-## Run the pipeline locally in 5 minutes
+## Run the pipeline locally
 
 1. Create an `.env` file and fill in the credentials to connect to the serverles Hopsworks Feature Store
     ```

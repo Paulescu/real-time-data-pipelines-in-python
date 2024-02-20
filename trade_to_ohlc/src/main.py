@@ -4,6 +4,7 @@ to config.KAFKA_TOPIC_NAME_OHLC.
 """
 import os
 import logging
+from datetime import timedelta
 
 from src.utils import initialize_logger, load_env_vars
 from src.app_factory import get_app
@@ -16,6 +17,7 @@ KAFKA_INPUT_TOPIC = os.environ["input"]
 KAFKA_OUTPUT_TOPIC = os.environ["output"]
 USE_LOCAL_KAFKA = True if os.environ.get('use_local_kafka') is not None else False
 
+WINDOW_SECONDS = 10
 
 def get_timestamp(val: dict, *_):
     # return val["timestamp"] * 1000
@@ -59,7 +61,9 @@ def run():
     sdf = app.dataframe(input_topic)
 
     # Window the data into 10 second intervals
-    sdf = sdf.tumbling_window(10, 0).reduce(reduce_price, init_reduce_price).final()
+    sdf = sdf.tumbling_window(timedelta(seconds=WINDOW_SECONDS), 0) \
+        .reduce(reduce_price, init_reduce_price) \
+        .final()
 
     # extract open, high, low, close
     sdf["open"] = sdf.apply(lambda v: v['value']['first'])

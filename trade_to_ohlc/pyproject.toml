@@ -10,7 +10,7 @@ python = "^3.10"
 pydantic = "^2.5.2"
 pyyaml = "^6.0.1"
 python-dotenv = "^1.0.0"
-quixstreams = {path = "quixstreams-2.2.0a0-py3-none-any.whl"}
+quixstreams = "^2.3.1"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -6,7 +6,7 @@ authors = ["Paulescu <plabartabajo@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.10,<3.12"
 streamlit = "^1.30.0"
 pandas = "^2.1.4"
 plotly = "^5.18.0"
@@ -14,6 +14,7 @@ pyyaml = "^6.0.1"
 python-dotenv = "^1.0.0"
 pydantic = "^2.5.3"
 bokeh = "2.4.3"
+hopsworks = "3.4.3"
 
 
 [build-system]

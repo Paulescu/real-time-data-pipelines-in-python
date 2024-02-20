@@ -9,14 +9,14 @@ from src.utils import initialize_logger, load_env_vars
 from src.feature_store_api.api import FeatureStore
 from src.feature_store_api.types import FeatureGroupConfig, FeatureViewConfig
 
-initialize_logger()
+# initialize_logger()
 load_env_vars()
 
 logger = logging.getLogger()
 
 OHLC_FEATURE_GROUP = FeatureGroupConfig(
     name='ohlc_feature_group',
-    version=2,
+    version=3,
     description='OHLC data for crypto products',
     primary_key=['timestamp', 'product_id'],
     event_time='timestamp',
@@ -25,7 +25,7 @@ OHLC_FEATURE_GROUP = FeatureGroupConfig(
 
 OHLC_FEATURE_VIEW = FeatureViewConfig(
     name='ohlc_feature_view',
-    version=3,
+    version=4,
     description='OHLC feature view',
     feature_group_config=OHLC_FEATURE_GROUP,
 )
@@ -41,7 +41,7 @@ def generate_list_primary_keys(
     for product_id in product_ids:
         for unix_seconds in range(from_unix_seconds, to_unix_seconds):
             primary_keys.append({
-                'timestamp': unix_seconds,
+                'timestamp': unix_seconds * 1000,
                 'product_id': product_id,
             })
 
@@ -72,7 +72,8 @@ def get_features(
         current_unix_seconds,
         product_ids)
     
-    logger.info(f'Reading {len(primary_keys)} primary keys from feature view')
+    logger.info(f'Reading {len(primary_keys)} primary keys from {OHLC_FEATURE_VIEW}.')
+    # breakpoint()
     features : pd.DataFrame = feature_view.read(primary_keys)
 
     # sort ohlc by product_id and timestamp
