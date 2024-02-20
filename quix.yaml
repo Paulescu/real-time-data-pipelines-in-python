@@ -54,21 +54,6 @@ deployments:
         description: ''
         required: true
         secretKey: HOPSWORKS_API_KEY
-  - name: trade_producer_old
-    application: trade_producer
-    deploymentType: Service
-    version: 8ed312eb6f32b358f83512b9965aa85f5aa9869d
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    desiredStatus: Stopped
-    variables:
-      - name: output
-        inputType: OutputTopic
-        description: This is the output topic to write data to
-        required: true
-        value: trades_topic
   - name: trade_producer
     application: trade_producer
     deploymentType: Service
