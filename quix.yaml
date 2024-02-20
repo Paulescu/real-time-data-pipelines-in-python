@@ -6,26 +6,6 @@ metadata:
 
 # This section describes the Deployments of the data pipeline
 deployments:
-  - name: trade_to_ohlc
-    application: trade_to_ohlc
-    deploymentType: Service
-    version: 39a63bf38e49b1f2ce96b621d6ce33a68e0d1281
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    desiredStatus: Running
-    variables:
-      - name: input
-        inputType: InputTopic
-        description: This is the input topic to read data from
-        required: true
-        value: trades_topic
-      - name: output
-        inputType: OutputTopic
-        description: This is the output topic to write data to
-        required: true
-        value: ohlc_topic
   - name: ohlc_to_feature_store
     application: ohlc_to_feature_store
     deploymentType: Service
@@ -104,6 +84,26 @@ deployments:
         description: This is the output topic to write data to
         required: true
         value: trades_topic
+  - name: trade_to_ohlc old
+    application: trade_to_ohlc
+    deploymentType: Service
+    version: 39a63bf38e49b1f2ce96b621d6ce33a68e0d1281
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic to read data from
+        required: true
+        value: trades_topic
+      - name: output
+        inputType: OutputTopic
+        description: This is the output topic to write data to
+        required: true
+        value: ohlc_topic
 
 # This section describes the Topics of the data pipeline
 topics:
