@@ -9,7 +9,7 @@
 </div>
 
 <div align="center">
-  <a href="PENDING">
+  <a href="https://dashboard-plabartabajo-ohlcinrealtime-production.deployments.quix.io/">
     <img src="../assets/dashboard.png" alt="Intro to the course" style="width:75%;">
     <p>Click here to see it in action ⚡</p>
   </a>
