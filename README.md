@@ -130,7 +130,13 @@ The streamlit app at `/dashboard` periodically fetches the latest data from the 
 
 The dashboard has been deployed to Quix Cloud and it is publicly accessible [here](https://dashboard-plabartabajo-ohlcinrealtime-production.deployments.quix.io/).
 
-![](assets/dashboard.png)
+
+<div align="center">
+  <a href="https://dashboard-plabartabajo-ohlcinrealtime-production.deployments.quix.io/">
+    <img src="assets/dashboard.png" alt="Intro to the course" style="width:75%;">
+    <p>Click here to see the dashoard in action</p>
+  </a>
+</div>
 
 
 ## Wanna learn more real-time ML?
