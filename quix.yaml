@@ -6,29 +6,6 @@ metadata:
 
 # This section describes the Deployments of the data pipeline
 deployments:
-  - name: streamlit-app 2
-    application: dashboard
-    deploymentType: Service
-    version: 23327f7e96b2d31731c5f36f53dc820bdf2da87c
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    publicAccess:
-      enabled: true
-      urlPrefix: streamlit
-    desiredStatus: Stopped
-    variables:
-      - name: HOPSWORKS_PROJECT_NAME
-        inputType: Secret
-        description: ''
-        required: true
-        secretKey: HOPSWORKS_PROJECT_NAME
-      - name: HOPSWORKS_API_KEY
-        inputType: Secret
-        description: ''
-        required: true
-        secretKey: HOPSWORKS_API_KEY
   - name: trade_producer
     application: trade_producer
     deploymentType: Service
