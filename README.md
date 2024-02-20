@@ -21,6 +21,7 @@
 * [Example](#example)
 * [Run the pipeline locally](#run-the-pipeline-locally)
 * [Deployment](#deployment)
+* [Streamlit dashboard for monitoring](#streamlit-dashboard-for-monitoring)
 * [Wanna learn more real-time ML?](#wanna-learn-more-real-time-ml)
 
 
@@ -83,7 +84,7 @@ Plus a
 
 - Streamlit `dashboard` to visualize the saved features in real-time.
 
-The final pipeline has been deployed to the [Quix Cloud](https://quix.io/), as well as the [Streamlit dashboard](https://streamlit-plabartabajo-ohlcinrealtime-production.deployments.quix.io/).
+The final pipeline has been deployed to the [Quix Cloud](https://quix.io/), as well as the [Streamlit dashboard](https://dashboard-plabartabajo-ohlcinrealtime-production.deployments.quix.io/).
 
 
 
@@ -123,9 +124,17 @@ To deploy this pipeline to the [Quix Cloud]() you just need to
 
 > [This video](https://quix.io/docs/create/overview.html#next-step) will help you get up and running on Quix Cloud
 
+## Streamlit dashboard for monitoring
+
+The streamlit app at `/dashboard` periodically fetches the latest data from the feature store, and plots it on a dashboard.
+
+The dashboard has been deployed to Quix Cloud and it is publicly accessible [here](https://dashboard-plabartabajo-ohlcinrealtime-production.deployments.quix.io/).
+
+![](assets/dashboard.png)
+
 
 ## Wanna learn more real-time ML?
 
-Join more than 11k subscribers to the Real-World ML Newsletter. Every Saturday morning.
+Join more than 13k subscribers to the Real-World ML Newsletter. Every Saturday morning.
 
 [→ Subscribe for FREE 🤗](https://www.realworldml.xyz/subscribe)
