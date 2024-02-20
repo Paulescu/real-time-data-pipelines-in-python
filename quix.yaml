@@ -6,31 +6,6 @@ metadata:
 
 # This section describes the Deployments of the data pipeline
 deployments:
-  - name: ohlc_to_feature_store
-    application: ohlc_to_feature_store
-    deploymentType: Service
-    version: f4e6564a0cf6912306bf2acdbae3de253980aac5
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    desiredStatus: Running
-    variables:
-      - name: input
-        inputType: InputTopic
-        description: This is the input topic to read data from
-        required: true
-        value: ohlc_topic
-      - name: HOPSWORKS_PROJECT_NAME
-        inputType: Secret
-        description: ''
-        required: true
-        secretKey: HOPSWORKS_PROJECT_NAME
-      - name: HOPSWORKS_API_KEY
-        inputType: Secret
-        description: ''
-        required: true
-        secretKey: HOPSWORKS_API_KEY
   - name: streamlit-app 2
     application: dashboard
     deploymentType: Service
@@ -89,6 +64,31 @@ deployments:
         description: This is the output topic to write data to
         required: true
         value: ohlc_topic
+  - name: ohlc_to_feature_store old
+    application: ohlc_to_feature_store
+    deploymentType: Service
+    version: f4e6564a0cf6912306bf2acdbae3de253980aac5
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic to read data from
+        required: true
+        value: ohlc_topic
+      - name: HOPSWORKS_PROJECT_NAME
+        inputType: Secret
+        description: ''
+        required: true
+        secretKey: HOPSWORKS_PROJECT_NAME
+      - name: HOPSWORKS_API_KEY
+        inputType: Secret
+        description: ''
+        required: true
+        secretKey: HOPSWORKS_API_KEY
 
 # This section describes the Topics of the data pipeline
 topics:
