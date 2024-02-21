@@ -89,6 +89,29 @@ deployments:
         description: ''
         required: true
         secretKey: HOPSWORKS_API_KEY
+  - name: streamlit-app
+    application: dashboard
+    deploymentType: Service
+    version: 0d6ec8dced8122de9de0e0343a9b6e0c8040301b
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: dashboard
+    desiredStatus: Running
+    variables:
+      - name: HOPSWORKS_PROJECT_NAME
+        inputType: Secret
+        description: ''
+        required: true
+        secretKey: HOPSWORKS_PROJECT_NAME
+      - name: HOPSWORKS_API_KEY
+        inputType: Secret
+        description: ''
+        required: true
+        secretKey: HOPSWORKS_API_KEY
 
 # This section describes the Topics of the data pipeline
 topics:
