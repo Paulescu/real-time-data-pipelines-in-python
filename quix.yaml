@@ -76,7 +76,7 @@ deployments:
       replicas: 1
     publicAccess:
       enabled: true
-      urlPrefix: dashboard
+      urlPrefix: dashboard-2
     desiredStatus: Running
     variables:
       - name: HOPSWORKS_PROJECT_NAME
