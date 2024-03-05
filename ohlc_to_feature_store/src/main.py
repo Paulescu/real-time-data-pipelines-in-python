@@ -29,7 +29,7 @@ def run():
     """
     # Define Quix your application and settings
     app = get_app(
-        consumer_group='ohlc-to-redis-consumer-group',
+        consumer_group='json_ohlc_consumer_group',
         use_local_kafka=USE_LOCAL_KAFKA,    
     )
     
