@@ -64,7 +64,7 @@ deployments:
         description: ''
         required: true
         secretKey: HOPSWORKS_API_KEY
-  - name: ohlc_to_feature_store 2
+  - name: ohlc_to_feature_store
     application: ohlc_to_feature_store
     deploymentType: Service
     version: 3cddf7189c498a45e1343be3f0c9ed5b02484f4c
