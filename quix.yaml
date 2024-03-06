@@ -49,36 +49,13 @@ deployments:
       cpu: 200
       memory: 500
       replicas: 1
-    desiredStatus: Running
+    desiredStatus: Stopped
     variables:
       - name: input
         inputType: InputTopic
         description: This is the input topic to read data from
         required: true
         value: ohlc_topic
-      - name: HOPSWORKS_PROJECT_NAME
-        inputType: Secret
-        description: ''
-        required: true
-        secretKey: HOPSWORKS_PROJECT_NAME
-      - name: HOPSWORKS_API_KEY
-        inputType: Secret
-        description: ''
-        required: true
-        secretKey: HOPSWORKS_API_KEY
-  - name: streamlit-app-old
-    application: dashboard
-    deploymentType: Service
-    version: 6a2973a1ca622f1d33e6586cb017a72ea89840a0
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    publicAccess:
-      enabled: true
-      urlPrefix: dashboard-2
-    desiredStatus: Stopped
-    variables:
       - name: HOPSWORKS_PROJECT_NAME
         inputType: Secret
         description: ''
@@ -100,7 +77,7 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: dashboard
-    desiredStatus: Running
+    desiredStatus: Stopped
     variables:
       - name: HOPSWORKS_PROJECT_NAME
         inputType: Secret
