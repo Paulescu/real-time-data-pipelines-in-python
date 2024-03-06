@@ -41,31 +41,6 @@ deployments:
         description: This is the output topic to write data to
         required: true
         value: ohlc_topic
-  - name: ohlc_to_feature_store
-    application: ohlc_to_feature_store
-    deploymentType: Service
-    version: 6a2973a1ca622f1d33e6586cb017a72ea89840a0
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    desiredStatus: Stopped
-    variables:
-      - name: input
-        inputType: InputTopic
-        description: This is the input topic to read data from
-        required: true
-        value: ohlc_topic
-      - name: HOPSWORKS_PROJECT_NAME
-        inputType: Secret
-        description: ''
-        required: true
-        secretKey: HOPSWORKS_PROJECT_NAME
-      - name: HOPSWORKS_API_KEY
-        inputType: Secret
-        description: ''
-        required: true
-        secretKey: HOPSWORKS_API_KEY
   - name: streamlit-app
     application: dashboard
     deploymentType: Service
@@ -77,7 +52,7 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: dashboard
-    desiredStatus: Stopped
+    desiredStatus: Running
     variables:
       - name: HOPSWORKS_PROJECT_NAME
         inputType: Secret
