@@ -143,4 +143,4 @@ The dashboard has been deployed to Quix Cloud and it is publicly accessible [her
 
 Join more than 13k subscribers to the Real-World ML Newsletter. Every Saturday morning.
 
-[→ Subscribe for FREE 🤗](https://www.realworldml.xyz/subscribe)
+[→ Subscribe for FREE 🤗](https://www.realworldml.net/subscribe)
