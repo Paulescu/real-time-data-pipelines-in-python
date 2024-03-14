@@ -1,5 +1,5 @@
 <div align="center">
-    <a href='https://www.realworldml.xyz/'><img src='./assets/rwml_logo.png' width='350'></a>    
+    <a href='https://www.realworldml.net/'><img src='./assets/rwml_logo.png' width='350'></a>    
 </div>
 
 <div align="center">
